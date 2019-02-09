@@ -6,12 +6,12 @@ namespace clearwaterstream
 {
     public static class LocalizedStringExtensions
     {
-        public static LocalizedString Localized(this string text)
+        public static LocalizedString Localize(this string invariantValue)
         {
-            return new LocalizedString(text);
+            return new LocalizedString(invariantValue);
         }
 
-        public static T And<T>(this T localizedString, string cultureName, string localizedValue) where T : LocalizedString
+        public static T In<T>(this T localizedString, string cultureName, string localizedValue) where T : LocalizedString
         {
             if (localizedString == null)
                 return localizedString;
@@ -21,34 +21,34 @@ namespace clearwaterstream
             return localizedString;
         }
 
-        public static T Invariant<T>(this T localizedString, string localizedValue) where T : LocalizedString
+        public static T Invariant<T>(this T localizedString, string invariantValue) where T : LocalizedString
         {
-            return And(localizedString, string.Empty, localizedValue);
+            return In(localizedString, string.Empty, invariantValue);
         }
 
         public static T InEnglish<T>(this T localizedString, string localizedValue) where T : LocalizedString
         {
-            return And(localizedString, "en-US", localizedValue);
+            return In(localizedString, "en-US", localizedValue);
         }
 
         public static T InQueensEnglish<T>(this T localizedString, string localizedValue) where T : LocalizedString
         {
-            return And(localizedString, "en-GB", localizedValue);
+            return In(localizedString, "en-GB", localizedValue);
         }
 
         public static T InCanadianEnglish<T>(this T localizedString, string localizedValue) where T : LocalizedString
         {
-            return And(localizedString, "en-CA", localizedValue);
+            return In(localizedString, "en-CA", localizedValue);
         }
 
         public static T InCanadianFrench<T>(this T localizedString, string localizedValue) where T : LocalizedString
         {
-            return And(localizedString, "fr-CA", localizedValue);
+            return In(localizedString, "fr-CA", localizedValue);
         }
 
         public static T InFrench<T>(this T localizedString, string localizedValue) where T : LocalizedString
         {
-            return And(localizedString, "fr-FR", localizedValue);
+            return In(localizedString, "fr-FR", localizedValue);
         }
     }
 }

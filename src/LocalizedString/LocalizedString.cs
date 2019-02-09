@@ -8,22 +8,16 @@ using System.Threading;
 
 namespace clearwaterstream
 {
-    public class LocalizedString : IEquatable<LocalizedString>, IEquatable<string>, IComparable, IComparable<LocalizedString>, IComparable<string>, ICloneable
+    public class LocalizedString : IEquatable<string>, IComparable, IComparable<string>, ICloneable
     {
-        static readonly string _defaultCultureName = string.Empty; // invariant
+        static readonly string invariantCultureName = string.Empty;
         readonly Dictionary<string, string> valueByCulture = new Dictionary<string, string>();
 
-        public LocalizedString(string localizedValue)
-        {
-            this[_defaultCultureName] = localizedValue;
-        }
+        public static readonly LocalizedString Empty = new LocalizedString();
 
-        public LocalizedString(string cultureName, string localizedValue)
+        public LocalizedString(string invariantValue)
         {
-            if (string.IsNullOrEmpty(cultureName))
-                cultureName = _defaultCultureName;
-
-            this[cultureName] = localizedValue;
+            this[invariantCultureName] = invariantValue;
         }
 
         private LocalizedString() { }
@@ -32,23 +26,48 @@ namespace clearwaterstream
         {
             get
             {
+                if (valueByCulture.Count == 0)
+                    return null;
+
                 if (cultureName == null)
-                    cultureName = _defaultCultureName;
+                    cultureName = invariantCultureName;
 
                 if (valueByCulture.TryGetValue(cultureName, out string localizedValue))
                     return localizedValue;
-                // if we cannot find the value based on the requested culture, try to fallback on the default culture ...
-                else if (valueByCulture.TryGetValue(_defaultCultureName, out string fallback))
-                    return fallback;
-                else
-                    return null;
+
+                // if there is no value for fr-CA say, see if have anything for jusr fr
+                if (cultureName.Contains("-"))
+                {
+                    var langCode = cultureName.Split('-')[0];
+
+                    if (valueByCulture.TryGetValue(langCode, out string byLangCode))
+                        return byLangCode;
+                }
+                
+                // if we cannot find the value based on the requested culture, fallback to invariant cultrue
+                if (valueByCulture.TryGetValue(invariantCultureName, out string invariantValue))
+                    return invariantValue;
+
+                return null;
             }
             set
             {
                 if (cultureName == null)
-                    cultureName = _defaultCultureName;
+                    cultureName = invariantCultureName;
 
                 valueByCulture[cultureName] = value;
+            }
+        }
+
+        public string this[CultureInfo cultureInfo]
+        {
+            get
+            {
+                return this[cultureInfo?.Name];
+            }
+            set
+            {
+                this[cultureInfo?.Name] = value;
             }
         }
 
@@ -59,9 +78,7 @@ namespace clearwaterstream
 
         public string ToString(CultureInfo culture)
         {
-            var cultureName = culture?.Name ?? null;
-
-            return this[cultureName];
+            return this[culture?.Name];
         }
 
         public string ToString(string cultureName)
@@ -71,9 +88,6 @@ namespace clearwaterstream
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-                return Equals(this, null);
-
             if (obj is string)
                 return Equals(this, (string)obj);
 
@@ -109,31 +123,13 @@ namespace clearwaterstream
             return Equals(this, other, comparisonType);
         }
 
-        public bool Equals(LocalizedString other)
-        {
-            return Equals(this, other?.ToString());
-        }
-
-        public bool Equals(LocalizedString other, StringComparison comparisonType)
-        {
-            return Equals(this, other?.ToString(), comparisonType);
-        }
-
         public int CompareTo(string other)
         {
             return string.Compare(ToString(), other);
         }
 
-        public int CompareTo(LocalizedString other)
-        {
-            return string.Compare(ToString(), other?.ToString());
-        }
-
         public int CompareTo(object obj)
         {
-            if (obj == null)
-                return string.Compare(ToString(), null);
-
             if (obj is string)
                 return string.Compare(ToString(), (string)obj);
 
@@ -145,12 +141,12 @@ namespace clearwaterstream
 
         public override int GetHashCode()
         {
-            var str = ToString();
+            var invariantValue = this[invariantCultureName];
 
-            if (str == null)
-                return string.Empty.GetHashCode();
+            if (invariantValue == null)
+                return Empty.GetHashCode();
 
-            return str.GetHashCode();
+            return invariantValue.GetHashCode();
         }
 
         public object Clone()
@@ -168,6 +164,11 @@ namespace clearwaterstream
         public static explicit operator string(LocalizedString localizedString)
         {
             return localizedString?.ToString();
+        }
+
+        public static implicit operator LocalizedString(string invariantValue)
+        {
+            return new LocalizedString(invariantValue);
         }
 
         public static bool operator ==(LocalizedString a, string b)

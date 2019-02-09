@@ -18,7 +18,8 @@ namespace clearwaterstream
                 .InCanadianEnglish("chicken, eh")
                 .InCanadianFrench("éh poulet")
                 .InFrench("poulet")
-                .InQueensEnglish("hen");
+                .InQueensEnglish("hen")
+                .In("zh", "Tso's parrot");
         }
 
         public LocalizedString SampleString { get; private set; }
@@ -54,6 +55,14 @@ namespace clearwaterstream
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("fr-FR");
 
             Assert.Equal("poulet", sample.ToString());
+        }
+
+        [Fact]
+        public void InSimplifiedChineese()
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("zh-Hans");
+
+            Assert.Equal("Tso's parrot", sample.ToString());
         }
     }
 }
