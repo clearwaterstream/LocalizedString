@@ -1,5 +1,5 @@
 # LocalizedString
-A simple library that allows for fluent definition of a string and its various translations, fluently in code. When accessing a defined localized string, `Thread.CurrentThread.CurrentCulture` will be used to provide the relavant tanslated value. You can also request a value for a particular culture.
+A simple library that allows for fluent definition of a string and its various translations, fluently in code. When accessing a defined localized string, `Thread.CurrentThread.CurrentCulture` will be used to provide the relevant translated value. You can also request a value for a specific culture.
 
 Useful for short strings. If strings are getting longer -- consider switching to time-tested technique of using resource files.
 
@@ -12,6 +12,9 @@ var sampleString = new LocalizedString("chicken")
     .InFrench("poulet")
     .InQueensEnglish("hen")
     .In("zh", "Tso's parrot");
+
+// you can also do
+sampleString["en-CA"] = "chicken, eh";
     
 // this will output the value based on Thread.CurrentThread.CurrentCulture. If no value is found, Invariant value is used.
 Console.WriteLine(sampleString.ToString()); 
@@ -23,6 +26,10 @@ If you would like to get a value for a particular locale, you can use
 
 ```csharep
 sampleString.ToString("en-CA");
+
+// or
+
+sampleString["en-CA"];
 ```
 
 If no suitable value is found for that locale, a value for `"en"` will be solicited. If no value is found, then invariant value will be returned.
