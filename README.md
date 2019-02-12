@@ -1,5 +1,7 @@
 # LocalizedString
-A simple library that allows you to fluently define a string and its various translations. When accesing the defined localized string, `Thread.CurrentThread.CurrentCulture` will be used to provide the relavant tanslated value, or you can request a value for a particular culture. Useful for short strings. If strings are getting longer - consider switching to time tested technique of using resource files
+A simple library that allows for fluent definition of a string and its various translations. When accessing a defined localized string, `Thread.CurrentThread.CurrentCulture` will be used to provide the relavant tanslated value. You can also request a value for a particular culture.
+
+Useful for short strings. If strings are getting longer -- consider switching to time-tested technique of using resource files.
 
 ## Here's how it's easy to define and use a LocalizedString:
 
@@ -15,4 +17,4 @@ var sampleString = new LocalizedString("chicken")
 Console.WriteLine(sampleString.ToString()); 
 ```
 
-When defining a localized string, invariant value must always be supplied. This is same as for `string` type. On top of the invariant value, you are free to add translations for various languages.
+When defining a localized string, invariant value must always be supplied. This is the same as for `string` type. Further to the invariant value, you are free to add translations for various languages.
