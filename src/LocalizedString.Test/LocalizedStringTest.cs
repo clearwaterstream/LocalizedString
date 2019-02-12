@@ -19,7 +19,7 @@ namespace clearwaterstream
                 .InCanadianFrench("éh poulet")
                 .InFrench("poulet")
                 .InQueensEnglish("hen")
-                .In("zh", "Tso's parrot");
+                .In("de", "das bird");
 
             SampleString.ToString();
         }
@@ -60,11 +60,11 @@ namespace clearwaterstream
         }
 
         [Fact]
-        public void InSimplifiedChineese()
+        public void InAustrianGerman()
         {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("zh-Hans");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("de-AT"); // Austria
 
-            Assert.Equal("Tso's parrot", sample.ToString());
+            Assert.Equal("das bird", sample.ToString());
         }
     }
 }
