@@ -1,5 +1,5 @@
 # LocalizedString
-A simple library that allows for fluent definition of a string and its various translations, fluently in code. When accessing a defined localized string, `Thread.CurrentThread.CurrentCulture` will be used to provide the relevant translated value. You can also request a value for a specific culture.
+A simple library that allows for fluent definition of a string and its various translations. When accessing a defined localized string, `Thread.CurrentThread.CurrentCulture` will be used to provide the relevant translated value. You can also request a value for a specific culture.
 
 Useful for short strings. If strings are getting longer -- consider switching to time-tested technique of using resource files.
 
