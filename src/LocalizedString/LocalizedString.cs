@@ -177,7 +177,7 @@ namespace clearwaterstream
             return localizedString?.ToString();
         }
 
-        public static implicit operator LocalizedString(string invariantValue)
+        public static explicit operator LocalizedString(string invariantValue)
         {
             return new LocalizedString(invariantValue);
         }
