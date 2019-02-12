@@ -18,3 +18,11 @@ Console.WriteLine(sampleString.ToString());
 ```
 
 When defining a localized string, invariant value must always be supplied. This is the same as for `string` type. Further to the invariant value, you are free to add translations for various languages.
+
+If you would like to get a value for a particular locale, you can use
+
+```csharep
+sampleString.ToString("en-CA");
+```
+
+If no suitable value is found for that locale, a value for "en" will be solicited. If no luck, invariant value will be returned.
