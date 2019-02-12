@@ -15,6 +15,10 @@ namespace clearwaterstream
 
         public static readonly LocalizedString Empty = new LocalizedString();
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="LocalizedString"/> class
+        /// </summary>
+        /// <param name="invariantValue">Invariant value for the string. This is the "default" value, same as for a regular <see cref="String"></see> type</param>
         public LocalizedString(string invariantValue)
         {
             this[invariantCultureName] = invariantValue;
@@ -22,6 +26,10 @@ namespace clearwaterstream
 
         private LocalizedString() { }
 
+        /// <summary>
+        /// Returns a value in the specified culture, if such value exists. Otherwise an invariant value is returned.
+        /// </summary>
+        /// <param name="cultureName">Culture name, such as "en-CA"</param>
         public string this[string cultureName]
         {
             get
@@ -71,6 +79,9 @@ namespace clearwaterstream
             }
         }
 
+        /// <summary>
+        /// Returns a value according to <see cref="Thread.CurrentThread.CurrentCulture"/> value
+        /// </summary>
         public override string ToString()
         {
             return ToString(Thread.CurrentThread.CurrentCulture);

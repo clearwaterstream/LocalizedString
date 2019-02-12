@@ -20,6 +20,8 @@ namespace clearwaterstream
                 .InFrench("poulet")
                 .InQueensEnglish("hen")
                 .In("zh", "Tso's parrot");
+
+            SampleString.ToString();
         }
 
         public LocalizedString SampleString { get; private set; }
