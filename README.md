@@ -11,7 +11,7 @@ var sampleString = new LocalizedString("chicken")
     .InCanadianFrench("éh poulet")
     .InFrench("poulet")
     .InQueensEnglish("hen")
-    .In("zh", "Tso's parrot");
+    .In("de", "das bird");
 
 // you can also do
 sampleString["en-CA"] = "chicken, eh";
@@ -32,4 +32,4 @@ sampleString.ToString("en-CA");
 sampleString["en-CA"];
 ```
 
-If no suitable value is found for that locale, a value for `"en"` will be solicited. If no value is found, then invariant value will be returned.
+If no suitable value is found for that locale, a value for `en` will be solicited. If no value is found, then invariant value will be returned.
