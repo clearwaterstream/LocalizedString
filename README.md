@@ -11,7 +11,7 @@ var sampleString = new LocalizedString("chicken")
     .InCanadianFrench("éh poulet")
     .InFrench("poulet")
     .InQueensEnglish("hen")
-    .In("zh", "Tso's parrot");
+    .In("de", "das bird");
 
 // you can also do
 sampleString["en-CA"] = "chicken, eh";
