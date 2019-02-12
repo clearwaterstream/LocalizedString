@@ -50,5 +50,10 @@ namespace clearwaterstream
         {
             return In(localizedString, "fr-FR", localizedValue);
         }
+
+        public static T InGerman<T>(this T localizedString, string localizedValue) where T : LocalizedString
+        {
+            return In(localizedString, "de-DE", localizedValue);
+        }
     }
 }

@@ -13,10 +13,11 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/clearwaterstream/LocalizedString/master/img/nuget_icon.png</PackageIconUrl>
-    <PackageReleaseNotes>v1.0.1 - Removed implicit operator overload for string as it was causing isses with extensions
+    <PackageReleaseNotes>v1.0.2 - Added German extension
+v1.0.1 - Removed implicit operator overload for string as it was causing isses with extensions
 v1.0.0 - Initial Release</PackageReleaseNotes>
     <Description>A simple library that allows for fluent definition of a string and its various translations.</Description>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
