@@ -24,7 +24,7 @@ When defining a localized string, invariant value must always be supplied. This 
 
 If you would like to get a value for a particular locale, you can use
 
-```csharep
+```csharp
 sampleString.ToString("en-CA");
 
 // or
