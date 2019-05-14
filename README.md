@@ -3,7 +3,7 @@ A simple library that allows for fluent definition of a string and its various t
 
 Useful for short strings. If strings are getting longer -- consider switching to time-tested technique of using resource files.
 
-## Here's how it's easy to define and use a LocalizedString:
+## Here's how easy it is to define and use a LocalizedString:
 
 ```csharp
 var sampleString = new LocalizedString("chicken")
