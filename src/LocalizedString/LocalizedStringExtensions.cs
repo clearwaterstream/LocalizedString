@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace clearwaterstream
@@ -9,6 +10,16 @@ namespace clearwaterstream
         public static LocalizedString Localize(this string invariantValue)
         {
             return new LocalizedString(invariantValue);
+        }
+
+        public static T In<T>(this T localizedString, CultureInfo cultureInfo, string localizedValue) where T : LocalizedString
+        {
+            if (localizedString == null)
+                return localizedString;
+
+            localizedString[cultureInfo] = localizedValue;
+
+            return localizedString;
         }
 
         public static T In<T>(this T localizedString, string cultureName, string localizedValue) where T : LocalizedString
@@ -55,5 +66,7 @@ namespace clearwaterstream
         {
             return In(localizedString, "de-DE", localizedValue);
         }
+
+        // todo -- add more
     }
 }
